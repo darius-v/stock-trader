@@ -10,7 +10,7 @@ const store = new Vuex.Store({
     funds: 0
   },
   mutations: {
-    increment (state, funds) {
+    setFunds (state, funds) {
       state.funds = funds
     }
   },
@@ -21,11 +21,13 @@ const store = new Vuex.Store({
   }
 });
 
-store.commit('increment', 9999);
+store.commit('setFunds', 9999);
 console.log(store.getters.getFunds);
 
 
 new Vue({
   el: '#app',
-  render: h => h(App)
+  render: h => h(App),
+  store // this makes store access from child components e.g.
+  // this.$store.getters.getFunds
 })

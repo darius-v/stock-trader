@@ -28,7 +28,7 @@
               <li><a href="#">Load</a></li>
             </ul>
           </li>
-          <li><a href="#">Funds 10000</a></li>
+          <li><a href="#">Funds {{ funds }}</a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -37,6 +37,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      funds: this.$store.getters.getFunds
+    }
+  }
   // props: {
   //   value: {
   //     type: String,
