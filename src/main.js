@@ -7,12 +7,13 @@ Vue.use(Vuex);
 Vue.use(VueRouter);
 
 import Home from './components/Home.vue';
-
-const Bar = { template: '<div>bar</div>' }
+import Portfolio from './components/Portfolio.vue';
+import Stocks from './components/Stocks.vue';
 
 const routes = [
   { path: '/', component: Home },
-  { path: '/bar', component: Bar }
+  { path: '/portfolio', component: Portfolio },
+  { path: '/stocks', component: Stocks },
 ]
 
 const router = new VueRouter({
