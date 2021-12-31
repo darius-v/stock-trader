@@ -44,9 +44,13 @@
 
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#">End day</a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Save and load <span class="caret"></span></a>
-            <ul class="dropdown-menu">
+          <li class="dropdown" @click="toggle">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
+
+            >
+              Save and load <span class="caret"></span>
+            </a>
+            <ul :class="['dropdown-menu', showDropdown]">
               <li><a href="#">Save</a></li>
               <li><a href="#">Load</a></li>
             </ul>
@@ -64,7 +68,17 @@ export default {
 
   data() {
     return {
-      funds: this.$store.getters.getFunds
+      funds: this.$store.getters.getFunds,
+      showDropdown: ''
+    }
+  },
+  methods: {
+    toggle() {
+      if (this.showDropdown === '') {
+        this.showDropdown = 'show';
+      } else {
+        this.showDropdown = '';
+      }
     }
   }
 }
