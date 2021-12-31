@@ -9,7 +9,8 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Stock trader</a>
+
+        <router-link to="/"><a class="navbar-brand" href="">Stock trader</a></router-link>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
@@ -36,7 +37,13 @@
 </template>
 
 <script>
+
+// import VueRouter from 'vue-router'
+
 export default {
+  // components: {
+  //   VueRouter
+  // },
   data() {
     return {
       funds: this.$store.getters.getFunds
