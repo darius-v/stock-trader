@@ -34,13 +34,12 @@ class StateController extends AbstractController
             $state = new State();
             $state->setState($request->get('state'));
             $em->persist($state);
-            $em->flush();
         } else {
             /** @var State $state */
             $state = $state[0];
             $state->setState($request->get('state'));
-            $em->flush();
         }
+        $em->flush();
 
         return new JsonResponse($state->getState());
     }

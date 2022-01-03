@@ -2,9 +2,11 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import App from './App.vue'
 import VueRouter from 'vue-router'
+import VueResource from 'vue-resource';
 
 Vue.use(Vuex);
 Vue.use(VueRouter);
+Vue.use(VueResource);
 
 import Home from './components/Home.vue';
 import Portfolio from './components/Portfolio.vue';
@@ -34,12 +36,12 @@ const store = new Vuex.Store({
     getFunds: state => {
       return state.funds;
     }
-  }
+  },
+
 });
 
 store.commit('setFunds', 9999);
 console.log(store.getters.getFunds);
-
 
 
 
@@ -48,5 +50,20 @@ new Vue({
   render: h => h(App),
   store, // this makes store access from child components e.g.
   // this.$store.getters.getFunds
-  router
+  router,
+  http: {
+    root: '/',
+
+  },
+  created() {
+
+
+    this.$http.get('http://localhost:8000').then(response => {
+
+      console.log(response.body);
+
+    }, response => {
+      console.log('error');
+    });
+  }
 })
