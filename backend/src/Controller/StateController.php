@@ -25,19 +25,21 @@ class StateController extends AbstractController
         }
     }
 
-    #[Route('/save-state', name: 'saveState')]
+    #[Route('/save-state', name: 'saveState', methods: ['POST'])]
     public function saveState(EntityManagerInterface $em, Request $request): JsonResponse
     {
         $state = $em->getRepository(State::class)->findBy([]);
 
+
+
         if (empty($state)) {
             $state = new State();
-            $state->setState($request->get('state'));
+            $state->setState($request->getContent());
             $em->persist($state);
         } else {
             /** @var State $state */
             $state = $state[0];
-            $state->setState($request->get('state'));
+            $state->setState($request->getContent());
         }
         $em->flush();
 

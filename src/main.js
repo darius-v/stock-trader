@@ -4,13 +4,14 @@ import App from './App.vue'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource';
 
-Vue.use(Vuex);
+// Vue.use(Vuex);
 Vue.use(VueRouter);
 Vue.use(VueResource);
 
 import Home from './components/Home.vue';
 import Portfolio from './components/Portfolio.vue';
 import Stocks from './components/Stocks.vue';
+import { store } from './store/store';
 
 const routes = [
   { path: '/', component: Home },
@@ -22,23 +23,6 @@ const router = new VueRouter({
   routes // short for `routes: routes`
 })
 
-const store = new Vuex.Store({
-  strict: true, // makes sure state is mutated only through mutations
-  state: {
-    funds: 0
-  },
-  mutations: {
-    setFunds (state, funds) {
-      state.funds = funds
-    }
-  },
-  getters: {
-    getFunds: state => {
-      return state.funds;
-    }
-  },
-
-});
 
 store.commit('setFunds', 9999);
 console.log(store.getters.getFunds);

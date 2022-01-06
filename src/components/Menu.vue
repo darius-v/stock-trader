@@ -51,7 +51,7 @@
               Save and load <span class="caret"></span>
             </a>
             <ul :class="['dropdown-menu', showDropdown]">
-              <li><a href="#">Save</a></li>
+              <li><a href="#" @click="save">Save</a></li>
               <li><a href="#">Load</a></li>
             </ul>
           </li>
@@ -64,7 +64,11 @@
 
 <script>
 
+import SaveLoad from "./SaveLoad.vue";
+
 export default {
+
+  components: {SaveLoad},
 
   data() {
     return {
@@ -79,6 +83,9 @@ export default {
       } else {
         this.showDropdown = '';
       }
+    },
+    save() {
+      this.$store.dispatch('save');
     }
   }
 }
