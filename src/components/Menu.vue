@@ -88,6 +88,7 @@ export default {
       let self = this;
       this.$store.dispatch('load').then(function () {
         self.funds = self.$store.getters.getFunds;
+        // todo should this not update automatically on setting new value in store?
       });
     },
     save() {

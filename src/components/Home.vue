@@ -14,7 +14,7 @@
 export default {
   data() {
     return {
-      funds: this.$store.getters.getFunds
+      funds: this.$store.getters.getFunds // todo should this not update automatically on setting new value in store?
     }
   }
 }
