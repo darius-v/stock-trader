@@ -24,7 +24,7 @@ const router = new VueRouter({
 })
 
 
-store.commit('setFunds', 9999);
+store.commit('setFunds', 1);
 console.log(store.getters.getFunds);
 
 

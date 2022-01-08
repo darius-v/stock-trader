@@ -52,7 +52,7 @@
             </a>
             <ul :class="['dropdown-menu', showDropdown]">
               <li><a href="#" @click="save">Save</a></li>
-              <li><a href="#">Load</a></li>
+              <li><a href="#" @click="load">Load</a></li>
             </ul>
           </li>
           <li><a href="#">Funds {{ funds }}</a></li>
@@ -83,6 +83,12 @@ export default {
       } else {
         this.showDropdown = '';
       }
+    },
+    load() {
+      let self = this;
+      this.$store.dispatch('load').then(function () {
+        self.funds = self.$store.getters.getFunds;
+      });
     },
     save() {
       this.$store.dispatch('save');

@@ -26,13 +26,38 @@ export const store = new Vuex.Store({
      Actions can contain arbitrary asynchronous operations.
      */
     actions: {
-        save (context) {
-            // todo - save state - call on menu click
-            // context.commit('increment')
-            console.log('save in store');
 
+        load ({ commit }) {
+            return new Promise((resolve) => {
 
-            console .log(this.state);
+                Vue.http.get('http://localhost:8000/').then(response => {
+                    console.log(response.body);
+                    let loadedState = JSON.parse(response.body);
+                    commit('setFunds', loadedState.funds );
+                    resolve();
+
+                }, () => {
+                    console.log('error');
+                });
+
+            })
+        },
+
+        // load({ commit }) {
+        //     Vue.http.get('http://localhost:8000/').then(response => {
+        //
+        //         console.log(response.body);
+        //         let loadedState = JSON.parse(response.body);
+        //         // this.setFunds(loadedState.funds);
+        //         commit('setFunds', loadedState.funds);
+        //
+        //         // this.funds = loadedState.funds;
+        //
+        //     }, () => {
+        //         console.log('error');
+        //     });
+        // },
+        save () {
             Vue.http.post('http://localhost:8000/save-state', this.state).then(response => {
 
                 console.log(response.body);

@@ -1,3 +1,5 @@
+This is a project for learning vue 2. Here I am not trying to make code look good.
+
 # vue-cli
 
 > A Vue.js project
