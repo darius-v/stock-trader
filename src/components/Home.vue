@@ -12,10 +12,11 @@
 
 <script>
 export default {
-  data() {
-    return {
-      funds: this.$store.getters.getFunds // todo should this not update automatically on setting new value in store?
+
+  computed: {
+    funds() {
+      return this.$store.getters.getFunds;
     }
-  }
+  },
 }
 </script>

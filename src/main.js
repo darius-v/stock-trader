@@ -23,12 +23,6 @@ const router = new VueRouter({
   routes // short for `routes: routes`
 })
 
-
-store.commit('setFunds', 1);
-console.log(store.getters.getFunds);
-
-
-
 new Vue({
   el: '#app',
   render: h => h(App),
@@ -37,17 +31,8 @@ new Vue({
   router,
   http: {
     root: '/',
-
   },
   created() {
-
-
-    this.$http.get('http://localhost:8000').then(response => {
-
-      console.log(response.body);
-
-    }, response => {
-      console.log('error');
-    });
+    this.$store.dispatch('load');
   }
 })

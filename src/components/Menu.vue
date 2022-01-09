@@ -72,8 +72,12 @@ export default {
 
   data() {
     return {
-      funds: this.$store.getters.getFunds,
       showDropdown: ''
+    }
+  },
+  computed: {
+    funds() {
+      return this.$store.getters.getFunds;
     }
   },
   methods: {
@@ -85,11 +89,7 @@ export default {
       }
     },
     load() {
-      let self = this;
-      this.$store.dispatch('load').then(function () {
-        self.funds = self.$store.getters.getFunds;
-        // todo should this not update automatically on setting new value in store?
-      });
+      this.$store.dispatch('load');
     },
     save() {
       this.$store.dispatch('save');
