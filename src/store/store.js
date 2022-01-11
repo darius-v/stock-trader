@@ -6,11 +6,17 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
     strict: true, // makes sure state is mutated only through mutations
     state: {
-        funds: 0
+        funds: 0,
+        // stocks: {
+        //     apple
+        // }
     },
     mutations: {
         setFunds (state, funds) {
             state.funds = funds
+        },
+        reduceFunds(state, amount) {
+            state.funds -= amount;
         }
     },
     getters: {
@@ -42,21 +48,6 @@ export const store = new Vuex.Store({
 
             })
         },
-
-        // load({ commit }) {
-        //     Vue.http.get('http://localhost:8000/').then(response => {
-        //
-        //         console.log(response.body);
-        //         let loadedState = JSON.parse(response.body);
-        //         // this.setFunds(loadedState.funds);
-        //         commit('setFunds', loadedState.funds);
-        //
-        //         // this.funds = loadedState.funds;
-        //
-        //     }, () => {
-        //         console.log('error');
-        //     });
-        // },
         save () {
             Vue.http.post('http://localhost:8000/save-state', this.state).then(response => {
 
