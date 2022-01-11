@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from "vuex";
+import stocks from "../stocks";
 
 Vue.use(Vuex);
 
@@ -7,9 +8,7 @@ export const store = new Vuex.Store({
     strict: true, // makes sure state is mutated only through mutations
     state: {
         funds: 0,
-        // stocks: {
-        //     apple
-        // }
+        stocks: stocks // amountToBuy property is added to stock by Stocks.vue which is not needed to save but does not hurt.
     },
     mutations: {
         setFunds (state, funds) {
@@ -17,6 +16,12 @@ export const store = new Vuex.Store({
         },
         reduceFunds(state, amount) {
             state.funds -= amount;
+        },
+        addStockQuantity(state, stockParam) {
+            let stockToUpdate = state.stocks.filter(function (stock) {
+                return stock.name === stockParam.name;
+            })
+            stockToUpdate.amount += stockParam.amount;
         }
     },
     getters: {
