@@ -12,15 +12,18 @@ export const store = new Vuex.Store({
     },
     mutations: {
         setFunds (state, funds) {
-            state.funds = funds
+            state.funds = funds;
+        },
+        setStocks(state, stocks) {
+            state.stocks = stocks;
         },
         reduceFunds(state, amount) {
             state.funds -= amount;
         },
-        addStockQuantity(state, stockParam) {
+        changeStockQuantity(state, stockParam) {
             state.stocks.forEach(function(stock, index) {
                 if (stock.name === stockParam.name) {
-                    stock.amount += parseInt(stockParam.amountToBuy);
+                    stock.amount += parseInt(stockParam.amountToChange);
                 }
             });
         }
@@ -49,6 +52,7 @@ export const store = new Vuex.Store({
                     console.log(response.body);
                     let loadedState = JSON.parse(response.body);
                     commit('setFunds', loadedState.funds );
+                    commit('setStocks', loadedState.stocks );
                     resolve();
 
                 }, () => {

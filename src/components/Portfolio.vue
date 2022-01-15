@@ -2,22 +2,29 @@
   <div class="panel panel-default">
     <div class="panel-body">
       <h1>Portfolio</h1>
-<!--      <div class="panel panel-default col-md-6" v-for="stock in portfolioStocks">-->
-<!--        <div class="panel-body">-->
-<!--          {{ stock.name }}: {{ stock.price}} {{ stock.amount }}-->
-<!--          <input type="number" v-model="stock.amountToSell">-->
-<!--          <button @click="sell(stock)">Sell</button>-->
-<!--        </div>-->
-<!--      </div>-->
+      <div class="panel panel-default col-md-6" v-for="stock in portfolioStocks">
+        <div class="panel-body">
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+
+            {{ stock.name }} Price: {{ stock.price}} Quantity: {{ stock.amount }}
+          </div>
+          <div class="panel-body">
+            <input type="number" v-model="stock.amountToChange">
+            <button @click="sell(stock)">Sell</button>
+          </div>
+        </div>
+        </div>
+
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import stocks from "../stocks";
 
 export default {
-
 
   computed: {
     portfolioStocks: function () {
@@ -25,16 +32,17 @@ export default {
       let portfolioStocks = this.$store.getters.getStocks;
 
       portfolioStocks.forEach(function (stock) {
-        stock.amountToSell = 0;
+        stock.amountToChange = 0;
       })
       return portfolioStocks;
     }
   },
   methods: {
     sell(stock) {
-      const cost = stock.amountToSell * stock.price;
-      this.$store.commit('reduceFunds', -cost);
-      this.$store.commit('addStockQuantity', stock);
+      stock.amountToChange = - stock.amountToChange;
+      const cost = stock.amountToChange * stock.price;
+      this.$store.commit('reduceFunds', cost);
+      this.$store.commit('changeStockQuantity', stock);
     }
   }
 }

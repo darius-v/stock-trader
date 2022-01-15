@@ -7,7 +7,7 @@
       <div class="panel panel-default col-md-6" v-for="stock in availableStocks">
         <div class="panel-body">
           {{ stock.name }}: {{ stock.price}}
-          <input type="number" v-model="stock.amountToBuy">
+          <input type="number" v-model="stock.amountToChange">
           <button @click="buy(stock)">Buy</button>
         </div>
       </div>
@@ -32,7 +32,7 @@ export default {
       let availableStocks = stocks;
 
       availableStocks.forEach(function (stock) {
-        stock.amountToBuy = 0; // this still sets this property to the array we imported
+        stock.amountToChange = 0; // this still sets this property to the array we imported
       })
       return availableStocks;
     }
@@ -40,9 +40,9 @@ export default {
 
   methods: {
     buy(stock) {
-      const cost = stock.amountToBuy * stock.price;
+      const cost = stock.amountToChange * stock.price;
       this.$store.commit('reduceFunds', cost);
-      this.$store.commit('addStockQuantity', stock);
+      this.$store.commit('changeStockQuantity', stock);
     }
   }
 }

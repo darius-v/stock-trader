@@ -30,8 +30,6 @@ class StateController extends AbstractController
     {
         $state = $em->getRepository(State::class)->findBy([]);
 
-
-
         if (empty($state)) {
             $state = new State();
             $state->setState($request->getContent());
