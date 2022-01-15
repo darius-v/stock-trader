@@ -18,15 +18,19 @@ export const store = new Vuex.Store({
             state.funds -= amount;
         },
         addStockQuantity(state, stockParam) {
-            let stockToUpdate = state.stocks.filter(function (stock) {
-                return stock.name === stockParam.name;
-            })
-            stockToUpdate.amount += stockParam.amount;
+            state.stocks.forEach(function(stock, index) {
+                if (stock.name === stockParam.name) {
+                    stock.amount += parseInt(stockParam.amountToBuy);
+                }
+            });
         }
     },
     getters: {
         getFunds: state => {
             return state.funds;
+        },
+        getStocks: state => {
+            return state.stocks;
         }
     },
 
@@ -53,7 +57,7 @@ export const store = new Vuex.Store({
 
             })
         },
-        save () {
+        save() {
             Vue.http.post('http://localhost:8000/save-state', this.state).then(response => {
 
                 console.log(response.body);
