@@ -39,10 +39,9 @@ export default {
   },
   methods: {
     sell(stock) {
-      stock.amountToChange = - stock.amountToChange;
       const cost = stock.amountToChange * stock.price;
       this.$store.commit('reduceFunds', cost);
-      this.$store.commit('changeStockQuantity', stock);
+      this.$store.commit('changeStockQuantity', {name: stock.name, amountToChange: - stock.amountToChange});
     }
   }
 }
